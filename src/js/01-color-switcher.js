@@ -1,8 +1,9 @@
 const refs = {
   startBtn: document.querySelector('button[data-start]'),
   stopBtn: document.querySelector('button[data-stop]'),
-  body: document.body,
 };
+
+refs.stopBtn.setAttribute('disabled', true);
 let intervalId;
 
 refs.startBtn.addEventListener('click', startGenerationColor);
@@ -10,19 +11,24 @@ refs.stopBtn.addEventListener('click', stopGenerationColor);
 
 function startGenerationColor(event) {
   event.currentTarget.setAttribute('disabled', true);
+  refs.stopBtn.removeAttribute('disabled');
 
-  let color = getRandomHexColor();
-  refs.body.style.backgroundColor = color;
+  setBodyBgColor(getRandomHexColor());
 
   intervalId = setInterval(() => {
-    color = getRandomHexColor();
-    refs.body.style.backgroundColor = color;
+    const color = getRandomHexColor();
+    setBodyBgColor(color);
   }, 1000);
 }
 
 function stopGenerationColor() {
   clearInterval(intervalId);
   refs.startBtn.removeAttribute('disabled');
+  refs.stopBtn.setAttribute('disabled', true);
+}
+
+function setBodyBgColor(color) {
+  document.body.style.backgroundColor = String(color);
 }
 
 function getRandomHexColor() {

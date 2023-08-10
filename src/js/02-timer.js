@@ -53,6 +53,9 @@ let timerId;
 refs.btn.addEventListener('click', startTimer);
 
 function startTimer() {
+  refs.btn.disabled = true;
+  refs.input.disabled = true;
+
   const chosenDate = new Date(refs.input.value);
 
   showTime(convertMs(chosenDate - Date.now()));
