@@ -56,12 +56,10 @@ function startTimer() {
   refs.btn.disabled = true;
   refs.input.disabled = true;
 
-  const chosenDate = new Date(refs.input.value);
-
-  showTime(convertMs(chosenDate - Date.now()));
+  showTime(convertMs(new Date(refs.input.value) - Date.now()));
 
   timerId = setInterval(() => {
-    const timeToFinish = chosenDate - Date.now();
+    const timeToFinish = new Date(refs.input.value) - Date.now();
 
     showTime(convertMs(timeToFinish));
 

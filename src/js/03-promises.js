@@ -9,7 +9,7 @@ function showMessage(event) {
 
   const { delay, step, amount } = event.currentTarget.elements;
 
-  if (delay.value < 0 || step.value < 0 || amount.value < 0) {
+  if (delay.value < 0 || step.value < 0 || amount.value <= 0) {
     Notiflix.Notify.warning(`❗ Please enter a positive number`);
   } else {
     for (let i = 0; i < amount.value; i += 1) {
